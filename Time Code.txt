@@ -1,0 +1,97 @@
+public class Solution 
+{
+    public string LargestTimeFromDigits(int[] arr) 
+    {
+        
+        string maxtime = "";
+        string finaltime = "";
+        int pivot = 0;
+        int temp = 0;
+        int j = 0;
+        
+        Array.Sort(arr);
+                
+        for (int i = 0; i < 4; i++)
+        {
+            if (arr[i] > 2 && maxtime != "")
+            {
+                Console.WriteLine("The number format is not possible");
+                break;
+            }
+            else if (arr[i] == 2)
+            {
+                maxtime = "2";
+                pivot = i;
+            }
+            else if (arr[i] == 1)
+            {
+                maxtime = "1";   
+                pivot = i;
+            }
+            else 
+            {
+                maxtime = "0";
+                pivot = i;
+            }
+        }
+            
+        Console.WriteLine("The max value " + maxtime.ToString());
+        Console.WriteLine("The pivot value " + pivot.ToString());
+        
+        if (pivot == 3)
+        {
+            temp = arr[3];
+            arr[3] = arr[0];
+            arr[0] = temp;
+            
+            if (arr[1] < arr[2])
+            {
+                temp = arr[2];
+                arr[2] = arr[1];
+                arr[1] = temp;
+            }
+        }
+        else if (pivot == 2)
+        {        
+            temp = arr[0];
+            arr[0] = arr[2];
+            arr[2] = arr[1];
+            arr[1] = temp;
+            
+            if (arr[3] == 3)
+            {
+                temp = arr[1];
+                arr[1] = arr[3];
+                arr[3] = temp;
+            }
+            else if (arr[2] > arr[1])
+            {
+                temp = arr[2];
+                arr[2] = arr[1];
+                arr[1] = temp;
+            }
+        }
+        else if (pivot == 1)
+        {
+            temp = arr[0];
+            arr[0] = arr[1];
+            arr[1] = temp;
+        }
+        
+        
+            
+        foreach ( int item in arr)
+        {
+            Console.WriteLine(item.ToString()); 
+        }
+        
+        finaltime = arr[0].ToString() + arr[1].ToString() + ":"+ 
+                    arr[2].ToString() + arr[3].ToString();
+        
+        Console.WriteLine("The Biggest time is "+ finaltime);
+        
+        
+        return finaltime;
+        
+    }
+}
